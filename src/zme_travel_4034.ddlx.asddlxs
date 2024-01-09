@@ -1,0 +1,168 @@
+@Metadata.layer: #CORE
+// 1 #CUSTOMER
+// 2 #PARTNER
+// 3 #LOCALIZATION
+// 4 #INDUSTRY
+// 5 #CORE
+
+//INICIO HEADER INFO
+@Search.searchable: true
+@UI:{ headerInfo: {   typeName: 'Travel',
+                      typeNamePlural: 'Travel',
+                      imageUrl: 'Attachment',  //case-sensitive
+                      title: {    type: #STANDARD,
+                                  label: 'Travel',
+                                  value: 'TravelID' } },
+
+      presentationVariant: [{ sortOrder: [{ by: 'TravelID',
+                                            direction: #ASC }],
+      visualizations: [{ type: #AS_LINEITEM }] }]
+ }
+//FIN HEADER INFO
+
+annotate view zc_travel_4034 with
+{
+
+  //INICIO FACET
+  @UI.facet: [
+         {
+           id:       'idIdentification',
+           purpose:  #STANDARD,
+           type:     #IDENTIFICATION_REFERENCE,
+           label:    'Travel',
+           position: 10 }
+       ]
+  //FIN FACET
+  
+  @Search.fuzzinessThreshold: 0.90
+      
+  @UI: {
+         lineItem: [ { position: 10 , importance: #HIGH, label: 'TravelID' } ]
+   , identification:[ { position: 10, label: 'TravelID' } ]
+       }
+  TravelID;
+  
+  @Search.defaultSearchElement: true 
+  @UI: {
+         lineItem: [ { position: 20 , importance: #HIGH, label: 'AgencyID' } ]
+   , identification:[ { position: 20, label: 'AgencyID' } ]
+       }
+  AgencyID;
+  
+  @UI: {
+         lineItem: [ { position: 30 , importance: #HIGH, label: 'CustomerID' } ]
+   , identification:[ { position: 30, label: 'CustomerID' } ]
+       }
+  CustomerID;
+  
+  @UI: {
+         lineItem: [ { position: 40, label: 'BeginDate' } ]
+   , identification:[ { position: 40, label: 'BeginDate' } ]
+         }
+  BeginDate;
+  
+  @UI: {
+         lineItem: [ { position: 50, label: 'EndDate' } ]
+   , identification:[ { position: 50, label: 'EndDate' } ]
+         }
+  EndDate;
+  
+  @UI: {
+         lineItem: [ { position: 60, label: 'BookingFee' } ]
+   , identification:[ { position: 60, label: 'BookingFee' } ]
+         }
+  BookingFee;
+  
+  @UI: {
+         lineItem: [ { position: 70 , importance: #HIGH, label: 'TotalPrice' } ]
+   , identification:[ { position: 70, label: 'TotalPrice' } ]
+       }
+  TotalPrice;
+  
+  @UI: {
+         lineItem: [ { position: 80 , importance: #HIGH, label: 'CurrencyCode' } ]
+   , identification:[ { position: 80, label: 'CurrencyCode' } ]
+       }
+  CurrencyCode;
+  
+  @UI: {
+         lineItem: [ { position: 90, label: 'Description' } ]
+   , identification:[ { position: 90, label: 'Description' } ]
+         }
+  Description;
+
+
+  @UI: {
+  //Agrega Botones en la Pantalla Principal
+  lineItem:       [ { position: 100, importance: #HIGH }
+//                    ,{ type: #FOR_ACTION, dataAction: 'copyTravel', label: 'Copy Travel' }
+//                    ,{ type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel (P)' }
+//                    ,{ type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel (P)' }
+       ],
+  identification: [ { position: 100 }
+  //Agrega Botones en el detalle
+//                   ,{ type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount' }
+//                   ,{ type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel (D)' }
+//                   ,{ type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel (D)' }
+       ],
+    textArrangement: #TEXT_ONLY
+  }
+  OverallStatus;
+  
+  @UI: {
+         lineItem: [ { position: 110, label: 'Attachment' } ]
+   , identification:[ { position: 110, label: 'Attachment' } ]
+         }
+
+  Attachment;
+  
+  @UI: {
+         lineItem: [ { position: 120, label: 'MimeType' } ]
+   , identification:[ { position: 120, label: 'MimeType' } ]
+         }
+  @UI.hidden: true
+  MimeType;
+  
+  @UI: {
+         lineItem: [ { position: 130, label: 'FileName' } ]
+   , identification:[ { position: 130, label: 'FileName' } ]
+         }
+  @UI.hidden: true
+  FileName;
+  
+  @UI: {
+         lineItem: [ { position: 140, label: 'CreatedBy' } ]
+   , identification:[ { position: 140, label: 'CreatedBy' } ]
+         }
+  @UI.hidden: true
+  CreatedBy;
+  
+  @UI: {
+         lineItem: [ { position: 150, label: 'CreatedAt' } ]
+   , identification:[ { position: 150, label: 'CreatedAt' } ]
+         }
+  @UI.hidden: true
+  CreatedAt;
+  
+  @UI: {
+         lineItem: [ { position: 160, label: 'LocalLastChangedBy' } ]
+   , identification:[ { position: 160, label: 'LocalLastChangedBy' } ]
+         }
+  @UI.hidden: true
+  LocalLastChangedBy;
+  
+  @UI: {
+         lineItem: [ { position: 170, label: 'LocalLastChangedAt' } ]
+   , identification:[ { position: 170, label: 'LocalLastChangedAt' } ]
+         }
+  @UI.hidden: true
+  LocalLastChangedAt;
+  
+  @UI: {
+         lineItem: [ { position: 180, label: 'LastChangedAt' } ]
+   , identification:[ { position: 180, label: 'LastChangedAt' } ]
+         }
+  @UI.hidden: true
+  LastChangedAt;
+
+}

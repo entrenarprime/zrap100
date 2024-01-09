@@ -1,0 +1,92 @@
+managed implementation in class zbp_r_travel_4034 unique;
+strict ( 2 );
+with draft;
+
+define behavior for zr_travel_4034 alias Travel
+persistent table ztravel_4034
+draft table ztravel_4034_d
+lock master
+//total etag
+total etag LastChangedAt
+authorization master ( global )
+//etag master
+etag master LocalLastChangedAt
+early numbering
+{
+  // Se cambio creo metodo para el create
+  create;
+  //Definimos para el control de funciones de instancia dinámica
+  update ( features : instance );
+  delete ( features : instance );
+
+  field ( readonly )
+  TravelID;
+
+  field ( readonly )
+  CreatedBy,
+  CreatedAt,
+  LocalLastChangedAt,
+  LocalLastChangedBy,
+  LastChangedAt;
+
+  field ( mandatory )
+  CustomerID,
+  BeginDate,
+  EndDate;
+
+
+  // agrego determination
+  determination setStatusToOpen on modify { create; }
+
+  //agregamos validation
+  validation validateCustomer on save { create; field CustomerID; }
+  validation validateDates on save { create; field BeginDate, EndDate; }
+
+  //Definimos para el control de funciones de instancia dinámica
+  //action ( features : instance ) /dmo/a_travel_discount parameter deductDiscount result [1] $self;
+
+
+  //action de fabrica
+  factory action copyTravel [1];
+
+  //Definimos para el control de funciones de instancia dinámica
+  action ( features : instance ) acceptTravel result [1] $self;
+  action ( features : instance ) rejectTravel result [1] $self;
+
+  //Definimos para el control de funciones de instancia dinámica
+  draft action ( features : instance ) Edit;
+
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+
+  //Arreglamos el Prepare
+  draft determine action Prepare
+  {
+    validation validateCustomer;
+    validation validateDates;
+  }
+
+  mapping for ztravel_4034
+    {
+      TravelID              = travel_id;
+      AgencyID              = agency_id;
+      CustomerID            = customer_id;
+      BeginDate             = begin_date;
+      EndDate               = end_date;
+      BookingFee            = booking_fee;
+      TotalPrice            = total_price;
+      CurrencyCode          = currency_code;
+      Description           = description;
+      OverallStatus         = overall_status;
+      Attachment            = attachment;
+      MimeType              = mime_type;
+      FileName              = file_name;
+      CreatedBy             = created_by;
+      CreatedAt             = created_at;
+      LocalLastChangedBy    = local_last_changed_by;
+      LocalLastChangedAt    = local_last_changed_at;
+      LastChangedAt         = last_changed_at;
+
+    }
+}

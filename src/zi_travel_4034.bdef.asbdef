@@ -1,0 +1,19 @@
+interface;
+use draft;
+
+define behavior for ZI_TRAVEL_4034 alias Travel
+{
+  use create;
+  use update;
+  use delete;
+
+  use action copyTravel;
+  use action acceptTravel;
+  use action rejectTravel;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+}

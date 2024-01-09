@@ -1,0 +1,20 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for zc_travel_4034 //alias <alias_name>
+{
+  use create;
+  use update;
+  use delete;
+
+  use action copyTravel;
+  use action acceptTravel;
+  use action rejectTravel;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+}
